@@ -5,12 +5,16 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="ticketRegistry" class="no.get.cas.ticket.registry.InfinispanTicketRegistry">
-        <property name="cacheManager" ref="cacheManager"/>
+        <property name="cache" ref="cache"/>
     </bean>
 
     <bean id="cacheManager" class="org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean">
         <property name="configurationFileLocation" value="classpath:/META-INF/infinispan-config.xml"/>
-        <!--<property name="cacheName" value="cas-store"/>-->
+    </bean>
+    
+    <bean id="cache" class="org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean">
+    	<property name="cacheName" value="cas-store"/>
+    	<property name="infinispanEmbeddedCacheManager" ref="cacheManager"/>
     </bean>
 
     <bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

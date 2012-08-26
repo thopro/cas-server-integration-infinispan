@@ -1,7 +1,6 @@
 package no.get.cas.ticket.registry;
 
 import org.infinispan.Cache;
-import org.infinispan.manager.EmbeddedCacheManager;
 import org.jasig.cas.ticket.Ticket;
 import org.jasig.cas.ticket.registry.AbstractDistributedTicketRegistry;
 
@@ -14,13 +13,7 @@ import java.util.Collection;
 
 public final class InfinispanTicketRegistry extends AbstractDistributedTicketRegistry {
 
-    private EmbeddedCacheManager cacheManager;
-
     private Cache<String, Ticket> cache;
-
-    private Cache<String, Ticket> getCache() {
-        return cacheManager.getCache("cas-store", true);
-    }
 
     @Override
     protected void updateTicket(Ticket ticket) {
@@ -85,11 +78,11 @@ public final class InfinispanTicketRegistry extends AbstractDistributedTicketReg
     public Collection<Ticket> getTickets() {
         return getCache().values();
     }
-
-    public void setCacheManager(EmbeddedCacheManager cacheManager) {
-        this.cacheManager = cacheManager;
+    
+    private Cache<String, Ticket> getCache() {
+    	return cache;
     }
-
+    
     public void setCache(final Cache<String, Ticket> cache) {
         this.cache = cache;
     }
