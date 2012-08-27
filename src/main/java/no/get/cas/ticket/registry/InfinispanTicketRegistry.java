@@ -8,7 +8,7 @@ import java.util.Collection;
 
 
 /**
- * TicketRegistry to support Spring Cache Abstraction.
+ * TicketRegistry to support Infinispan.
  */
 
 public final class InfinispanTicketRegistry extends AbstractDistributedTicketRegistry {

@@ -9,6 +9,6 @@
 
     <default/>
 
-    <namedCache name="cas-store"/>
+<!--    <namedCache name="cas-store"/>-->
 
 </infinispan>

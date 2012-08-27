@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="ticketRegistry" class="no.get.cas.ticket.registry.InfinispanTicketRegistry">
         <property name="cache" ref="cache"/>
     </bean>
 
-    <bean id="cacheManager" class="org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean">
-        <property name="configurationFileLocation" value="classpath:/META-INF/infinispan-config.xml"/>
-    </bean>
+    <bean id="cacheManager" class="org.infinispan.spring.support.embedded.InfinispanEmbeddedCacheManagerFactoryBean"/>
     
     <bean id="cache" class="org.infinispan.spring.support.embedded.InfinispanNamedEmbeddedCacheFactoryBean">
-    	<property name="cacheName" value="cas-store"/>
+    	<property name="cacheName" value="${cache.name}"/>
     	<property name="infinispanEmbeddedCacheManager" ref="cacheManager"/>
     </bean>
 
